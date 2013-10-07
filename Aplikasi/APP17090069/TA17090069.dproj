@@ -1,0 +1,200 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{03567D8B-82BD-441D-B0AD-366CE1690FE5}</ProjectGuid>
+			<ProjectVersion>12.0</ProjectVersion>
+			<MainSource>TA17090069.dpr</MainSource>
+			<Config Condition="'$(Config)'==''">Debug</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<DCC_UsePackage>vcl;rtl;vclx;vclactnband;xmlrtl;vclimg;dbrtl;vcldb;vcldbx;bdertl;vcltouch;dsnap;dsnapcon;TeeUI;TeeDB;Tee;vclib;ibxpress;adortl;IndyCore;IndySystem;IndyProtocols;inet;intrawebdb_100_140;Intraweb_100_140;VclSmp;vclie;websnap;webdsnap;inetdb;inetdbbde;inetdbxpress;soaprtl;vclribbon;dbexpress;DbxCommonDriver;DataSnapIndy10ServerTransport;DataSnapProviderClient;DbxClientDriver;DataSnapServer;DBXInterBaseDriver;DBXMySQLDriver;dbxcds;DBXFirebirdDriver;DBXSybaseASEDriver;DBXSybaseASADriver;DBXOracleDriver;DBXMSSQLDriver;DBXInformixDriver;DBXDb2Driver;ZComponent;ZDbc;ZPlain;ZCore;ZParseSql</DCC_UsePackage>
+			<DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+			<DCC_DependencyCheckOutputName>TA17090069.exe</DCC_DependencyCheckOutputName>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_Platform>x86</DCC_Platform>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_DebugDCUs>true</DCC_DebugDCUs>
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="TA17090069.dpr">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="datamodul.pas">
+				<Form>FrmDataModul</Form>
+				<DesignClass>TDataModule</DesignClass>
+			</DCCReference>
+			<DCCReference Include="index.pas">
+				<Form>FrmIndex</Form>
+			</DCCReference>
+			<DCCReference Include="PARENT.pas"/>
+			<DCCReference Include="DML.pas">
+				<Form>FrmDML</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="XMLSetting.pas"/>
+			<DCCReference Include="XMLLog.pas"/>
+			<DCCReference Include="ruangan.pas">
+				<Form>FrmRuangan</Form>
+			</DCCReference>
+			<DCCReference Include="splashscreen.pas">
+				<Form>FrmSplashScreen</Form>
+			</DCCReference>
+			<DCCReference Include="debugdb.pas">
+				<Form>FrmDebugDB</Form>
+			</DCCReference>
+			<DCCReference Include="jurusan.pas">
+				<Form>FrmJurusan</Form>
+			</DCCReference>
+			<DCCReference Include="SESSION.pas"/>
+			<DCCReference Include="pengajar.pas">
+				<Form>FrmPengajar</Form>
+			</DCCReference>
+			<DCCReference Include="matapelajaran.pas">
+				<Form>FrmMatapelajaran</Form>
+			</DCCReference>
+			<DCCReference Include="kegiatan.pas">
+				<Form>FrmKegiatan</Form>
+			</DCCReference>
+			<DCCReference Include="penjadwalan.pas">
+				<Form>FrmPenjadwalan</Form>
+			</DCCReference>
+			<DCCReference Include="uLkJSON.pas"/>
+			<DCCReference Include="MODULE.pas"/>
+			<DCCReference Include="pengajar_aturan.pas">
+				<Form>FrmPengajarAturan</Form>
+			</DCCReference>
+			<DCCReference Include="configag.pas">
+				<Form>FrmConfigAG</Form>
+			</DCCReference>
+			<DCCReference Include="OKegiatan.pas"/>
+			<DCCReference Include="ORuangan.pas"/>
+			<DCCReference Include="OAturanPengajar.pas"/>
+			<DCCReference Include="about.pas">
+				<Form>FrmAbout</Form>
+			</DCCReference>
+			<None Include="ModelSupport_TA17090069\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\datamodul\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\pengajar\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\XMLLog\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\jurusan\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\SESSION\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\debugdb\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\TA17090069\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\uLkJSON\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\PARENT\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\MODULE\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\DML\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\matapelajaran\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\index\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\XMLSetting\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\ruangan\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\splashscreen\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\kegiatan\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\penjadwalan\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\pengajar_aturan\default.txvpck"/>
+			<None Include="ModelSupport_TA17090069\TA17090069\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\uLkJSON\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\matapelajaran\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\ruangan\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\XMLSetting\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\DML\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\PARENT\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\penjadwalan\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\pengajar\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\MODULE\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\debugdb\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\pengajar_aturan\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\index\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\XMLLog\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\SESSION\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\kegiatan\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\jurusan\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\datamodul\default.txaPackage"/>
+			<None Include="ModelSupport_TA17090069\splashscreen\default.txaPackage"/>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">TA17090069.dpr</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
+						<VersionInfo Name="MajorVer">0</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">36</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1057</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName">deehieday.inc</VersionInfoKeys>
+						<VersionInfoKeys Name="FileDescription">Aplikasi Pembuat Jadwal Kegiatan Belajar Mengajar</VersionInfoKeys>
+						<VersionInfoKeys Name="FileVersion">0.0.0.36</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">UBSI-17090069</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Dede Hidayat</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename">UBSI-17090069</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductName">UBSI-17090069</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments">Skripsi</VersionInfoKeys>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcboffice2k140.bpl">Embarcadero C++Builder Office 2000 Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\bcbofficexp140.bpl">Embarcadero C++Builder Office XP Servers Package</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dcloffice2k140.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+						<Excluded_Packages Name="$(BDS)\bin\dclofficexp140.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<ModelSupport>False</ModelSupport>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+	</Project>

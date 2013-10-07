@@ -1,0 +1,334 @@
+2013 Agustus 21
+* BACKUP 17090069_BAK011 sebelum penyesuaian ke Github
+
+2013 Agustus 20
+* Masukkan --> Bobot Tingkat Kesulitan Pelajaran, supaya pelajaran yang sulit tidak berada dalam 1 hari
+* Memperbaiki error ketika dilakukan GENERATE yg berulang2.
+* Apabila dipilih berdasarkan kelas tertentu, maka hanya gunakan ruang yang digunakan kelas tertentu tersebut, unutk mempercepat pembuatan jadwal
+* Memperbaiki ICON
+!!! Masih mencari cara untuk mengurutkan jadwal sekolah
+
+=====================================================================
+2013 Juli 30
+* Tanda tangan pembimbing sudah selesai
+* memperbaiki Laporan, hapus jarak di Heading 1
+* Masih mencari cara untuk membuat aturan sekolah
+
+2013 Juli 15
+* [BACKUP] Aplikasi 17090069_BAK010 sebelum re-coding untuk mempercepat aplikasi
+* 
+
+2013 Juli 02
+* [BACKUP] Aplikasi 17090069_BAK009 sudah penyesuaian dengan BSC dan database SQLite3
+* Laporan REVISI TERAKHIR dari Pak HENDI !!!!!!!!
+
+2013 Juni 13
+* Pindahan ke Bandung Timur Regency
+* Tambah Aturan guru sesuai petuah
+
+2013 Juni 06
+* Laporan di aplikasi BSC sudah jadi, tinggal mencari aturan di BSC dan implementasi di Fitness
+
+2013 Juni 05
+* Ubah aplikasi dengan menggunakan SQLite bsc.db 
+
+2013 Juni 3
+* Revisi Bab II di Tinjauan Jurnal saja
+* Remove Hanging dari tiap heading
+* [BACKUP] Aplikasi 17090069_BAK008 sebelum penyesuaian dengan BSC
+* Lanjut bab 3 dan normalisasi data BSC
+
+2013 Mei 28
+* Tambah data dari Bina Saana Cendikia
+* Revisi BabII
+
+2013 Mei 16
+* Revisi Bab 1 & 2. Belum bab3 dst Riet di STTB Pungkur
+* Revisi Bab 1 & 2. Belum bab3 dst Riet di STTB Pungkur
+
+2013 April 17
+* Tambah Panduan Penyusuan Skripsi dari BSI 
+* Renaming folder
+
+2013 Februari 27
+* [NEW] Tambah AtrnTbrk di Excel pada DEBUG_MODE
+* [NEW] Tambah pilihan untuk menampilkan data yang kosong ketika mencetak ke Excel [Masih ada bugs di jadwal Dosen ; TblKelasKuliah]
+* [BACKUP] MySQL ke ta17090069_07.sql
+* [BACKUP] 17090069_BAK007
+* STOPPPPP Cari data Real dari BSI untuk sample !!!!!!!!!!!
+
+2013 Februari 26
+* [BACKUP] 17090069_BAK006
+* Modifikasi semua ForeignKey menjadi Cascade ketika dihapus, 
+* Tambah tabel QueryDosenJurusan di FrmDataModul
+
+QueryDosenJurusan	:
+SELECT a.id_dosenjurusan,a.id_dosen,b.dosen,a.id_jurusan,c.jurusan
+FROM dosenjurusan a
+JOIN dosen b ON b.id_dosen=a.id_dosen
+JOIN jurusan c ON c.id_jurusan=a.id_jurusan
+
+2013 Februari 21
+* [BACKUP] 17090069_BAK005
+* Membuat FrmDebugDB untuk antisipasi konfigurasi salah
+* BACKUP FrmPenjadwalan dg laporan manual ke penjadwalan_BAK_001
+* Modifikasi ParseKodeKelas() ke ParseKode()
+* BACKUP FrmPenjadwlaan dg laporan Dinamis menggunakan Json ke penjadwalan_BAK_002, format Parameter seperti dibawah
+{
+	"data":["Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"],
+	"judul":["Jadwal Matakuliah","Universitas BSI Bandung","Semester : Ganjil"],
+	"header":["Hari","DD"],
+	"comparefield":"hari",
+	"excel":{"status":"Membuat Jadwal hari","sheetname":"Jadwal Hari","showempty":true},
+	"fields":[
+		{"field":"id_matakuliah","alias":"Kode MK","colwidth":9,"horalign":3,"markaturan":[1,2,3]},
+	]
+}
+
+
+
+2013 Februari 19
+* [Edit] Hapus field alamat dr tabel dosen dan field kapasitas dari tabel ruangan, reorder nip dan dosen dari tabel dosen  
+* [New] TblDosenMengajar & TblKelasDiajar di FrmPenjadwalan u/ optimasi pembuatan laporan
+* [New] Laporan Kelas
+* [Edit] Perbaikan Laporan
+* Backup MySQL to ta17090069_04.sql
+
+TblDosenMengajar	:
+SELECT DISTINCT d.id_dosen
+FROM dosen d
+JOIN dosenjurusan dj ON dj.id_dosen=d.id_dosen
+JOIN kegiatan k ON k.id_dosenjurusan=dj.id_dosenjurusan
+JOIN matakuliah mk ON mk.id_matakuliah=k.id_matakuliah
+JOIN semester s ON s.semester=mk.semester
+ORDER BY id_dosen ASC
+
+TblKelasDiajar		:
+SELECT DISTINCT j.id_jurusan,mk.semester,k.kelas
+FROM jurusan j
+JOIN matakuliah mk ON mk.id_jurusan=j.id_jurusan
+JOIN kegiatan k ON k.id_matakuliah = mk.id_matakuliah
+JOIN semester s ON s.semester=mk.semester
+ORDER BY id_jurusan ASC,semester ASC, kelas ASC
+
+
+2013 Februari 13
+* Tambah Document
+* Modif MODULE.pas.BAK_001, ubah di Crossover ke fungsi GetJumBeda
+
+2013 Februari 11
+* GONG SHI FAT CHAI :))
+* Bersih2 file backup
+
+2013 Februari 08
+* BACKUP.004 
+
+2013 Februari 06
+* BACKUP.002, BACKUP.003
+* Memperbaiki tampilan dan reconvert dari alpha ke standar
+* Tambah Tag <skin> dan <jpfield> di Setting.xml
+
+2013 Februari 05
+* Bersih bersih file
+* Perbaiki fungsi DBSearch di FrmDML
+* Reposition form
+* ReConfig untuk AlphaControls Skins 17090069_alpha
+
+2013 Februari 04
+* Re-coding Module(CrossOver,BangkitkanPopulasi)
+* Tambah Laporan Bab III
+
+2013 Februari 01
+* Optimizing code
+* Penyesuaian JAM_KULIAH dan aturan(3)
+
+2013 Januari 31
+* Remove Tabel kelas ubah ke array KELAS_KULIAH
+* Remove Tabel hari ubah ke array HARI_KULIAH
+* Remove Tabel jam ubah ke array JAM_KULIAH
+* Remove Tabel sks ubah ke array SKS_KULIAH
+* Backup SQL ta17090069_03.sql   
+!!! Perbaiki aturan 3 (Masih harus Trial Error)
+
+2013 Januari 30
+* Tambah XMLLog untuk menyimpan log kedalam xml, untuk laporan nanti 
+
+2013 Januari 29
+* Update Database MySQL sesuai desain MySQL Workbench
+* Backup aplikasi 17090069_BAK001
+* Tambah aturan(8) untuk klasifikasi kelas A(Pagi) B(Malam) C(Siang) 
+
+2013 Januari 27
+* Perbaikan koding frmPenjadwalan
+
+2013 Januari 25
+* Rubah kombinasi kedalam Record TKombinasi
+^ Jangan gunakan Kode Kelas di hitung fitness untuk mempercepat gunakan index
+
+2013 Januari 22
+* Tambah Aturan No.9 untuk mengantisipasi hari jum'at dari jam 11-13 
+!!! Jam Per kelas, misalkan kelas B adalah kelas malam(17.00-21.30)
+
+2013 Januari 21
+* Remove kode_kelas dari aplikasi dan DB
+* Update ID Dosen menjadi Inisial
+* Backup MySQL Data
+
+2013 Januari 10
+* Tambah Field kode_kelas di tabel Jurusan, NIP di table Dosen,  untuk mengikuti Format BSI ex: 17.7B.33
+* Tambah fungsi ParseKodeKelas di FrmPenjadwalan
+
+FrmPenjadwalan : TblKelasKuliah
+SELECT 
+id_kegiatan,mk.id_matakuliah,matakuliah,sks,
+j.id_jurusan,jurusan,
+s.semester,kelas,jam_pertemuan,
+d.id_dosen,dosen,s.grup,
+dj.id_dosenjurusan
+FROM kegiatan k
+JOIN matakuliah mk ON mk.id_matakuliah=k.id_matakuliah
+JOIN dosenjurusan dj ON dj.id_dosenjurusan=k.id_dosenjurusan
+JOIN dosen d ON d.id_dosen=dj.id_dosen
+JOIN semester s ON s.semester=mk.semester
+JOIN jurusan j ON j.id_jurusan=dj.id_jurusan AND j.id_jurusan=mk.id_jurusan
+ORDER BY id_jurusan ASC,semester ASC, kelas ASC
+
+
+2013 Januari 07
+* Tambah Tabel kelasjam untuk penyesuaian kelas dengan jam kuliah (A=Pagi, B=Malam, C=Siang)
+* Tambah Progressbar di FrmPenjadwalan
+
+2013 Januari 04
+* Tricky Form Kegiatan + Filter/Mastersource, Hapus Tblkegiatan di datamodul
+* Tambah Bobot Fitness No 10
+
+FrmKegiatan : TblKegiatanQuery
+SELECT k.id_kegiatan,dj.id_jurusan,CONCAT(k.id_matakuliah,' : ',m.matakuliah) AS matakuliah,m.sks,m.semester, CONCAT(d.id_dosen,' : ',d.dosen) AS dosen,k.kelas,k.jam_pertemuan
+FROM kegiatan k
+JOIN dosenjurusan dj ON dj.id_dosenjurusan=k.id_dosenjurusan
+JOIN dosen d ON d.id_dosen=dj.id_dosen
+JOIN matakuliah m ON m.id_matakuliah=k.id_matakuliah
+ORDER BY k.id_matakuliah ASC
+
+
+2013 Januari 03
+* Change property MaxKromosom to JUMLAHGEN
+* Tambah aturan Jumlah Gen Kelas kuliah harus sama dengan Jumlah Kelas Kuliah
+* Tambah Event onCLose Index
+
+2013 Januari 02
+* Resruktur Code Pembuatan Laporan
+* Update field id di table Jam,Hari,dan Semester dg Sorter
+* Ubah jam pertemuan berdasarkan sks
++ Memperbaiki Fitness
+! Apabila Aplikasi destroy ketika FrmSetting masih dibuka , ada error
+! Ketika Generate Pupulasi, masih ada kemungkinan ID kegiatan tidak dimasukkan
+
+
+2012 Desember 31
+* Tambah Mutasi
+* Migrasi Selesai,
+! Masih ada error kalau jam bljar 16.00 dan JP lebih dari 1
+
+FrmPenjadwalan : TblKelasKuliah
+SELECT id_kegiatan,mk.id_matakuliah,matakuliah,sks,jam_pertemuan,
+dj.id_dosenjurusan,d.id_dosen,dosen,j.id_jurusan,jurusan,kelas,s.semester,s.grup
+FROM kegiatan k
+JOIN matakuliah mk ON mk.id_matakuliah=k.id_matakuliah
+JOIN dosenjurusan dj ON dj.id_dosenjurusan=k.id_dosenjurusan
+JOIN dosen d ON d.id_dosen=dj.id_dosen
+JOIN semester s ON s.semester=mk.semester
+JOIN jurusan j ON j.id_jurusan=dj.id_jurusan
+WHERE mk.id_jurusan=dj.id_jurusan
+
+
+2012 Desember 28
+* Highlighted Laporan
+* Lanjut Form Penjadwalan
+* Preview
+
+FrmPenjadwalan : Query_Temp
+SELECT id_kegiatan,mk.id_matakuliah,matakuliah,sks,jam_pertemuan,
+dj.id_dosenjurusan,d.id_dosen,dosen,j.id_jurusan,jurusan,kelas,semester
+FROM kegiatan k
+JOIN matakuliah mk ON k.id_matakuliah=mk.id_matakuliah
+JOIN dosenjurusan dj ON k.id_dosenjurusan=dj.id_dosenjurusan
+JOIN dosen d ON dj.id_dosen=d.id_dosen
+JOIN jurusan j ON dj.id_jurusan=j.id_jurusan
+WHERE mk.id_jurusan=dj.id_jurusan
+
+
+
+2012 Desember 27
+* Form Penjadwalan belum final
+
+Query_KelasKuliah
+select a.id_kegiatan,a.id_matakuliah,a.jam_pertemuan,c.id_dosen,b.id_jurusan,a.kelas,b.semester
+from kegiatan a join matakuliah b on a.id_matakuliah=b.id_matakuliah 
+join dosenjurusan c on a.id_dosenjurusan=c.id_dosenjurusan 
+where c.id_jurusan=b.id_jurusan
+
+
+2012 Desember 25
+!!!! Masalah : Penempatan jam untuk kelas tertentu, misalkan kelas B untuk kelas malam
+!!!! PEncarian dengan menggunakan Query DataSet
+
+2012 Desember 24
+* NEXT >> Ide untuk Tambahkan triger di SQLite untuk mengatasai masalah referensial integritas
+* Form Matakuliah -> Mastersource
+* Form Kegiatan -> Mastersource
+
+2012 Desember 21
+* Rename semua nama komponen agar konsisten Frm,Tbl,Edt,DB,True,False,if,then,else,not localvariable ke camelStyle
+* Tambah Table Grup untuk gruping semester ganjil/genap : MessageBeep();
+* Move Application.ini to setting.xml
+* Form Matakuliah nForms
+
+{
+case DSDosen.DataSet.State of
+  dsInactive: ShowMessage('dsInactive');
+  dsBrowse:  ShowMessage('dsBrowse');
+  dsEdit:   ShowMessage('dsEdit');
+  dsInsert:  ShowMessage('dsInsert');
+  dsSetKey:  ShowMessage('dsSetKey');
+  dsCalcFields:ShowMessage('dsCalcFields');
+  dsFilter:     ShowMessage('dsFilter');
+  dsNewValue:   ShowMessage('dsNewValue');
+  dsOldValue:     ShowMessage('dsOldValue');
+  dsCurValue:     ShowMessage('dsCurValue');
+  dsBlockRead:    ShowMessage('dsBlockRead');
+  dsInternalCalc:   ShowMessage('dsInternalCalc');
+  dsOpening:      ShowMessage('dsOpening');
+end;
+}
+GetEnumName(TypeInfo(TParameter),integer(Params));
+
+2012 Desember 20
+* PRAGMA foreign_keys; untuk mengaktifkan foreign keys di library (System32/SysWOW64)
+* Optimasi Konsep SQLIte + MySQL dan menggunakan Default MySQL, karena SQLite tidak langsung update Foreign Key on Update
+* Ubah Form Dosenjurusan 
+* Form Matakuliah belum selesai
+
+2012 Desember 19
+* Customize MessageDLG dg Bahasa Indonesia
+* Splashscreen 
+* Optimasi parentChildForm
+* Session dan Application.ini + [Sqlite|Mysql] database
+* DML for Ruangan,Hari,Jam,Kelas,Semester - Dosen,Jurusan - DosenJurusan
+
+2012 Desember 18
+* Buat Program baru dengan Delphi 2010(14) dan ZeosLib 7.alpha dan SQLite ta17090069.sqlite3
+
+2012 Desember 17
+* Tambah Landasan Teori Algortima Genetik
+* Update Stylesheet (Tambah H5 & Modify H4) dan simpan di Guide TA Style BSI.dotx
+* Desain Konsep DATABASE pake MySQL Workbench 
+
+
+2012 Desember 14
+* Penambahan Laporan di Bab I dan Bab II
+
+2012 Oktober 18
+* Inisiasi pembuatan sejarah.log untuk jejak ketika transfer data.
+
+[MJ6jYlEHUIeVR7Nx]

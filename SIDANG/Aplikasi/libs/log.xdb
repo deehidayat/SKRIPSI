@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <xs:element name="deehiedaylog" type="deehiedaylogType"/>
+  <xs:complexType name="deehiedaylogType"><xs:annotation>
+      <xs:appinfo xdb:docElement="deehiedaylog"/>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="log" type="logType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="logType">
+    <xs:sequence>
+      <xs:element name="datetime" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="string"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="hari" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ruang" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="jam" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kelas" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="fawal" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="fakhir" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="iterasi" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="Integer"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="time" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="string"/>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ket" type="xs:string"><xs:annotation>
+          <xs:appinfo xdb:dataType="string"/>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
