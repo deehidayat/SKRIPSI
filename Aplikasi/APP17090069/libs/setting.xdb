@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+	<xs:element name="deehieday" type="deehiedayType"/>
+	<xs:complexType name="deehiedayType"><xs:annotation>
+			<xs:appinfo xdb:docElement="deehieday"/>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="debug" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="kodekelas" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="splashimage" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jpfield" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="populasi" type="xs:integer"><xs:annotation>
+					<xs:appinfo xdb:dataType="integer"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="database" type="databaseType"/>
+			<xs:element name="skin" type="skinType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="databaseType">
+		<xs:sequence>
+			<xs:element name="protocol" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="host" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="user" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="password" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="skinType">
+		<xs:sequence>
+			<xs:element name="aktif" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="template" type="xs:string"><xs:annotation>
+					<xs:appinfo xdb:dataType="string"/>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

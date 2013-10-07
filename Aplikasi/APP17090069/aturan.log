@@ -1,0 +1,480 @@
+
+  if FrmDML.BtnAdd.Action = FrmDML.DBAdd then
+  begin
+    FrmDML.DBAdd.Execute;
+    ToggleState(False);
+  end else if FrmDML.BtnAdd.Action = FrmDML.DBConfirm then begin
+    FrmDML.DBAdd.Execute;
+    ToggleState(True);
+  end;
+  if FrmDML.BtnEdit.Action = FrmDML.DBEdit then
+  begin
+    FrmDML.DBEdit.Execute;
+    ToggleState(False);
+  end else if FrmDML.BtnEdit.Action = FrmDML.DBCancel then begin
+    FrmDML.DBCancel.Execute;
+    ToggleState(True);
+
+
+                // Maju
+                {
+                  if Hari1 = 4 then
+                  begin
+                  if (JP1 < 7) and (JP2 >= 8) then
+                  k := k + 2
+                  else if ((JP1 < 4) and (JP2 >= 5)) or
+                  ((JP1 < 13) and (JP2 >= 14)) then
+                  k := k + 1;
+                  end
+                  else
+                  begin
+                  if ((JP1 < 4) and (JP2 >= 5)) or ((JP1 < 8) and (JP2 >= 9))
+                  or ((JP1 < 13) and (JP2 >= 14)) then
+                  k := k + 1;
+                  end;
+                  }
+
+  if 6 in ENABLEDATURAN then
+  begin
+    with FrmPenjadwalan do
+    begin
+      if TblKelasDiajar.Active = false then
+        TblKelasDiajar.Active := True;
+      for i := 0 to TblKelasDiajar.RecordCount - 1 do
+      begin
+        TblKelasDiajar.RecNo := i + 1;
+        for j := 0 to JUMLAHHARI - 1 do
+        begin
+          HasJadwal := false;
+          HasAwal := false;
+          for k := 0 to JUMLAHJAM - 1 do
+          begin
+            if Length(CurrSolusi[i][j][k]) > 0 then
+            begin
+              // Tandai Mata Pelajaran Paling atas untuk di tandai
+              // if not(HasJadwal) then
+              PosGenTabrk := CurrSolusi[i][j][k][0].pos;
+              HasJadwal := True;
+              if k = 0 then
+                HasAwal := True;
+            end;
+          end;
+          if (HasJadwal) and not(HasAwal) then
+          begin
+            Fitness := Fitness + 1;
+          end;
+        end;
+      end;
+    end;
+  end;
+  
+  {
+    // 10. Menghindari Ada Matakuliah yang tidak dimasukkan ke dalam Gen ketika Membangkitkan populasi
+    if 10 in ENABLEDATURAN then
+    begin
+    JumKelas := 0;
+    for i := 0 to TotalGen - 1 do
+    begin
+    if Kromosom[NoKromosom][i] <> '0' then
+    Inc(JumKelas);
+    end;
+    with FrmPenjadwalan.TblKegiatanQuery do
+    begin
+    if (JumKelas < RecordCount) then
+    begin
+    Fitness := Fitness + (1 * (RecordCount - JumKelas));
+    end;
+    end;
+    end;
+    }
+
+
+ if 1 in ENABLEDATURAN then
+  begin
+    for i := 0 to TotalGen - 1 do
+    begin
+      if Kromosom[NoKromosom][i] <> '0' then
+      begin
+        FrmPenjadwalan.TblKegiatanQuery.Locate
+          (KEY_FIELD, Kromosom[NoKromosom][i], []);
+        JP1 := Alelle[i].KodeJam;
+        JP2 := JP1 + FrmPenjadwalan.TblKegiatanQuery.FieldByName
+          (JAM_PERTEMUAN_FIELD).AsInteger;
+        Hari1 := Alelle[i].KodeHari;
+        KodeMtk1 := FrmPenjadwalan.TblKegiatanQuery.FieldByName('mpid')
+          .AsInteger;
+        // Over Time
+        if JP2 > JUMLAHJAM then
+        begin
+          Fitness := Fitness + 1;
+          PosGenTabrk := i;
+          MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+          MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+        end
+        // Jumatan
+        else if (Hari1 = 4) and (JP1 >= 7) and (JP1 <= 8) then
+        begin
+          Fitness := Fitness + 1;
+          PosGenTabrk := i;
+          MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+          MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+        end
+        // Jam Istirahat
+        else if (JP1 = 4) or (JP1 = 8) or (JP1 = 13) then
+        begin
+          Fitness := Fitness + 1;
+          PosGenTabrk := i;
+          MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+          MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+        end
+        // Apabila ada mata pelajaran dalam satu ruangan seblum jam habis..
+        else
+        begin
+          j := 1;
+          if ((JP1 < 4) and (JP2 >= 5)) or ((JP1 < 8) and (JP2 >= 9)) or
+            ((JP1 < 13) and (JP2 >= 14)) then
+            j := j + 1;
+          if (JP2 - JP1 = 2) or (JP2 - JP1 = 3) or (JP2 - JP1 = 4) then
+          begin
+            if (Kromosom[NoKromosom][i + j] <> '0') and
+              (Alelle[i].KodeRuang = Alelle[i + j].KodeRuang) then
+            begin
+              Fitness := Fitness + 1;
+              PosGenTabrk := i;
+              MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+              MatTabrak1[Fitness] := Kromosom[NoKromosom][i + j];
+            end;
+          end;
+          if (JP2 - JP1 = 3) or (JP2 - JP1 = 4) then
+          begin
+            if (Kromosom[NoKromosom][i + j + 1] <> '0') and
+              (Alelle[i].KodeRuang = Alelle[i + j + 1].KodeRuang) then
+            begin
+              Fitness := Fitness + 1;
+              PosGenTabrk := i;
+              MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+              MatTabrak1[Fitness] := Kromosom[NoKromosom][i + j + 1];
+            end;
+          end;
+          if (JP2 - JP1 = 4) then
+          begin
+            if (Kromosom[NoKromosom][i + j + 2] <> '0') and
+              (Alelle[i].KodeRuang = Alelle[i + j + 2].KodeRuang) then
+            begin
+              Fitness := Fitness + 1;
+              PosGenTabrk := i;
+              MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+              MatTabrak1[Fitness] := Kromosom[NoKromosom][i + j + 2];
+            end;
+          end;
+        end;
+      end; // if <> 0
+    end; // for i
+  end; // if ENABLED
+
+
+// Sortir current solusi untuk memudahkan pencarian Fitness;
+  // Apabila disimpan di SQL proses menjadi lambat;
+  {
+    with FrmPenjadwalan do
+     begin
+       if TblKelasDiajar.Active = false then
+         TblKelasDiajar.Active := True;
+       SetLength(CurrSolusi, TblKelasDiajar.RecordCount);
+       for i := 0 to TblKelasDiajar.RecordCount - 1 do
+       begin
+         TblKelasDiajar.RecNo := i + 1;
+         SetLength(CurrSolusi[i], JUMLAHHARI);
+         for j := 0 to JUMLAHHARI - 1 do
+         begin
+           SetLength(CurrSolusi[i][j], JUMLAHJAM);
+           for k := 0 to JUMLAHJAM - 1 do
+           begin
+             for l := 0 to Length(Solusi) - 1 do
+             begin
+               if Solusi[l].id <> '0' then
+               begin
+                 TblKegiatanQuery.Locate(KEY_FIELD, Kromosom[NoKromosom][l], []);
+                 if (TblKegiatanQuery.FieldByName('tingkatid')
+                     .AsInteger = TblKelasDiajar.FieldByName('tingkatid')
+                     .AsInteger) and (TblKegiatanQuery.FieldByName('jid')
+                     .AsInteger = TblKelasDiajar.FieldByName('jid').AsInteger) and
+                   (TblKegiatanQuery.FieldByName('kelasid')
+                     .AsInteger = TblKelasDiajar.FieldByName('kelasid').AsInteger)
+                   and (Alelle[l].KodeHari = j) and (Alelle[l].KodeJam = k) then
+                 begin
+                   SetLength(CurrSolusi[i][j][k], Length(CurrSolusi[i][j][k]) + 1);
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].id :=
+                     Kromosom[NoKromosom][l];
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].pos := l;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1]
+                     .tingkatid := TblKelasDiajar.FieldByName('tingkatid')
+                     .AsInteger;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].jid :=
+                     TblKelasDiajar.FieldByName('jid').AsInteger;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].kelasid :=
+                     TblKelasDiajar.FieldByName('kelasid').AsInteger;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].hariid :=
+                     Alelle[l].KodeHari;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].jamid :=
+                     Alelle[l].KodeJam;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].rid :=
+                     Alelle[l].KodeRuang;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].mpid :=
+                     TblKegiatanQuery.FieldByName('mpid').AsInteger;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].pid :=
+                     TblKegiatanQuery.FieldByName('pid').AsInteger;
+                   CurrSolusi[i][j][k][Length(CurrSolusi[i][j][k]) - 1].Jam :=
+                     TblKegiatanQuery.FieldByName('jam').AsInteger;
+                 end;
+               end;
+             end;
+           end;
+         end;
+       end;
+     end;
+ } 
+ 
+
+  {
+    SQLText := 'delete from kromosom;';
+    for i := 0 to TotalGen - 1 do
+    begin
+    if Kromosom[NoKromosom][i] <> '0' then
+    begin
+    SQLText := SQLText + Format(
+    'insert into kromosom(kid,hariid,rid,jamid,gen) values(%s,%d,%d,%d,%d);'
+    , [Kromosom[NoKromosom][i], Alelle[i].KodeHari, Alelle[i].KodeRuang,
+    Alelle[i].KodeJam, i]);
+    end;
+    end;
+    with FrmPenjadwalan.ZQuery do
+    begin
+    Active := False;
+    SQL.Text := SQLText;
+    ExecSQL;
+    end;
+    }
+  
+    {
+      with FrmPenjadwalan.TblKegiatanQuery do
+      begin
+      for i := 0 to TotalGen - 1 do
+      begin
+      if Kromosom[NoKromosom][i] <> '0' then
+      begin
+      Locate(KEY_FIELD, Kromosom[NoKromosom][i], []);
+      JP1 := Alelle[i].KodeJam;
+      JP2 := JP1 + FieldByName(JAM_PERTEMUAN_FIELD).AsInteger;
+
+      j := 0;
+      if ((JP1 < 4) and (JP2 >= 5)) or ((JP1 < 8) and (JP2 >= 9)) or
+      ((JP1 < 13) and (JP2 >= 14)) then
+      j := j + 1;
+      if (i + j + (JP2 - JP1) < TotalGen) and
+      (Kromosom[NoKromosom][i + j + (JP2 - JP1)] = '0') and
+      (Alelle[i].KodeRuang = Alelle[i + j + (JP2 - JP1)].KodeRuang) then
+      begin
+      Fitness := Fitness + 1;
+      PosGenTabrk := i;
+      MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+      end;
+      end;
+      end;
+      end;
+      }
+  {
+  // 3. Satu kelas tidak boleh kuliah lebih dari 3 kelas dalam 1 hari
+
+    IndHari := 1;
+    JedaHari := JUMLAHRUANG * JUMLAHJAM;
+
+    with FrmDataModul do
+    SetLength(JumKuliah, TblJurusan.RecordCount, 3, Length(KELAS_KULIAH));
+
+    with FrmPenjadwalan.TblKegiatanQuery do
+    for i := 0 to TotalGen - 1 do
+    begin
+    if (i >= ((IndHari - 1) * JedaHari)) and (i < (IndHari * JedaHari)) then
+    begin
+    if Kromosom[NoKromosom][i] <> '0' then
+    begin
+    Locate(KEY_FIELD, Kromosom[NoKromosom][i], []);
+    Jurusan1 := FieldByName('kode_jurusan').AsString;
+    Semester1 := FieldByName('tingkat').AsString;
+    // KodeMtk1 := FieldByName('kode_matapelajaran').AsString;
+    Kelas1 := FieldByName('kelas').AsString;
+
+    for j := 0 to FrmDataModul.TblJurusan.RecordCount - 1 do
+    begin
+    for k := 0 to Length(TINGKAT) - 1 do
+    begin
+    for l := 0 to Length(KELAS_KULIAH) - 1 do
+    begin
+    JumKuliah[j][k][l] := 0;
+    end;
+    end;
+    end;
+
+    FrmDataModul.TblJurusan.First;
+    for j := 0 to FrmDataModul.TblJurusan.RecordCount - 1 do
+    begin
+    for k := 0 to Length(TINGKAT) - 1 do
+    begin
+    for l := 0 to Length(KELAS_KULIAH) - 1 do
+    begin
+    if (FrmDataModul.TblJurusan.FieldByName('kode')
+    .AsString = Jurusan1) and (TINGKAT[k] = Semester1) and
+    (KELAS_KULIAH[l] = Kelas1) then
+    begin
+    JumKuliah[j][k][l] := JumKuliah[j][k][l] + 1;
+    if JumKuliah[j][k][l] > 4 then
+    begin
+    Fitness := Fitness + 1;
+    MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+    MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+    end;
+    end;
+    end;
+    end;
+    FrmDataModul.TblJurusan.Next;
+    end;
+
+    end; // end if  Kromosom[NoKromosom][i] <> '0'
+    end; // end if  ( i >= ((IndHari-1)*JedaHari) ) and ( i < (IndHari * JedaHari))
+
+    if i = (IndHari * JedaHari) then
+    IndHari := IndHari + 1;
+
+    end; // end for i
+
+    }
+	
+	
+	
+  {
+  // 5. Pengajar ada di ruang yang berbeda pada jam yang sama
+    if 5 in ENABLEDATURAN then
+    begin
+    IndHari := 1;
+    JedaHari := JUMLAHRUANG * JUMLAHJAM;
+    with FrmPenjadwalan.TblKegiatanQuery do
+    begin
+    for i := 0 to TotalGen - 1 do
+    begin
+    if (Kromosom[NoKromosom][i] <> '0') and
+    ((i >= ((IndHari - 1) * JedaHari)) and
+    (i < ((IndHari * JedaHari) - JUMLAHJAM))) then
+    begin
+    Locate(KEY_FIELD, Kromosom[NoKromosom][i], []);
+    Dosen1 := FieldByName('pid').AsInteger;
+    JP1 := Alelle[i].KodeJam;
+    JP2 := Alelle[i].KodeJam + FieldByName(JAM_PERTEMUAN_FIELD).AsInteger;
+    // Ruang1 := i;
+    for j := ((IndHari - 1) * JedaHari) to
+    ((IndHari * JedaHari) - JUMLAHJAM) do
+    begin
+    if (i <> j) and (Alelle[i].KodeRuang <> Alelle[j].KodeRuang) and
+    (Alelle[i].KodeHari = Alelle[j].KodeHari) and
+    (Kromosom[NoKromosom][j] <> '0') then
+    begin
+    Locate(KEY_FIELD, Kromosom[NoKromosom][j], []);
+    Dosen2 := FieldByName('pid').AsInteger;
+    // Ruang2 := j;
+    // ?? Kenapa j-i harus > 50
+    if (Dosen1 = Dosen2) and (j - i > 50) and
+    (Alelle[i].KodeJam < JUMLAHJAM) and
+    (Alelle[j].KodeJam < JUMLAHJAM) then
+    begin
+    Fitness := Fitness + 1;
+    PosGenTabrk := i;
+    MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+    MatTabrak1[Fitness] := Kromosom[NoKromosom][j];
+    end;
+    end;
+    end; // for j
+    end; // if
+    if i + 1 = (IndHari * JedaHari) then
+    IndHari := IndHari + 1;
+    end; // for i
+    end;
+    end;
+
+    }
+	
+	
+  {
+  // 7. Penyesuaian dengan waktu Istirahat BSC
+    if 7 in ENABLEDATURAN then
+    begin
+    with FrmPenjadwalan.TblKegiatanQuery do
+    begin
+    for i := 0 to TotalGen - 1 do
+    begin
+    if Kromosom[NoKromosom][i] <> '0' then
+    begin
+    // Apabila Jam Awal adalah waktu istirahat
+    if ((Alelle[i].KodeJam = 4) or (Alelle[i].KodeJam = 8) or
+    (Alelle[i].KodeJam = 13)) then
+    begin
+    Fitness := Fitness + 1;
+    PosGenTabrk := i;
+    MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+    MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+    end;
+    JP1 := Alelle[i].KodeJam;
+    JP2 := JP1 + FieldByName(JAM_PERTEMUAN_FIELD).AsInteger;
+    Hari1 := Alelle[i].KodeHari;
+    // Apabila Jam Awal bukan waktu istirahat dan Jam Akhir Melewati waktu istirahat
+    if ((JP1 < 4) and (JP2 >= 5)) or
+    ((Hari1 <> 4) and (JP1 < 8) and (JP2 >= 9)) or
+    ((JP1 < 13) and (JP2 >= 14)) then
+    begin
+    if (Kromosom[NoKromosom][i + (FieldByName(JAM_PERTEMUAN_FIELD)
+    .AsInteger)] <> '0') then
+    begin
+    Fitness := Fitness + 1;
+    PosGenTabrk := i;
+    MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+    MatTabrak1[Fitness] := Kromosom[NoKromosom][i + (JP2 - JP1)];
+    end;
+    end;
+    end;
+    end;
+    end;
+    end;
+    }
+	
+	
+  {
+  // 9. Menghindari jam 11.45-12.45 pada hari jum'at
+    if 9 in ENABLEDATURAN then
+    begin
+    IndHari := 1;
+    JedaHari := JUMLAHRUANG * JUMLAHJAM;
+    with FrmPenjadwalan.TblKegiatanQuery do
+    begin
+    for i := 4 * JedaHari to 5 * JedaHari - 1 do
+    begin
+    if Kromosom[NoKromosom][i] <> '0' then
+    begin
+    // Hari1 := AmbilHari(Kromosom[NoKromosom][i]);
+    Hari1 := Alelle[i].KodeHari;
+    if (Hari1 = 4) then
+    begin
+    Locate(KEY_FIELD, Kromosom[NoKromosom][i], []);
+    JP1 := Alelle[i].KodeJam;
+    JP2 := JP1 + FieldByName(JAM_PERTEMUAN_FIELD).AsInteger;
+    if ((JP1 >= 7) and (JP1 <= 8)) or ((JP2 > 7) and (JP2 <= 8)) then
+    begin
+    Fitness := Fitness + 1;
+    PosGenTabrk := i;
+    MatTabrak[Fitness] := Kromosom[NoKromosom][i];
+    MatTabrak1[Fitness] := Kromosom[NoKromosom][i];
+    end;
+    end;
+    end;
+    end;
+    end;
+    end;
+    }

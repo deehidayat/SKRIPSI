@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<deehieday>
+	<debug>false</debug>
+	<exaturan>1,7,8,9,10</exaturan>
+	<exlaporan>3,2,4</exlaporan> <!-- 1.Umum 2.Hari 3.Pengajar 4.Kelas -->
+	<kodekelas>%tingkat%-%kode_jurusan%%kelas%</kodekelas>
+	<splashimage>arsenal.jpg</splashimage>
+	<!-- <jpfield>jam</jpfield> -->
+	<!-- <populasi></populasi> -->
+	<skin>
+		<aktif>false</aktif>
+		<template>Topaz</template><!-- AlterMetro,Aluminium,AutumnSky,Garnet,Mint,Topaz,TV-b,WEB2,WMP 2008 -->
+	</skin>
+	<databases>
+		<protocol>mysql</protocol>
+		<name>ta17090069</name>
+		<host>localhost</host>
+		<user>root</user>
+		<passwords>+8rnLi6hdzayE_m3hDkK9L7ukbp9nju8nD1b5V-utX+P_BLJKXsLT1Q0NLnyCa5MT2Lm-G0</passwords>
+	</databases>
+	<database>
+		<protocol>sqlite-3</protocol>
+		<name>.\libs\bsc.db</name>
+	</database>
+</deehieday>
+<!-- 
+	1 OK / Masih suka mentok 	// Kelas harus merata
+	2 OK 	// Overtime, Jumatan, Waktu Istirahat, [ dan bentrok pada satu ruangan sebelum waktu habis ]
+	3 OK	// Kelas berada lebih dari satu ruangan pada waktu yg sama
+	4 OK	// Pengajar berada lebih dari satu ruangan pada waktu yg sama
+	5 OK	// Aturan Pengajar
+	6 OK	// Penempatan Tingkat (X-XI-XII) di ruangan yang seharusnya
+	Belum diperikasa	// -. Jarak antara kegiatan tidak padat / ada jarak kosong
+	Belum diperikasa	// 7. Jam Awal tidak di awal hari
+ -->

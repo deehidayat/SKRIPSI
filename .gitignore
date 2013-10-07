@@ -1,0 +1,15 @@
+_*/
+_*.*
+_*
+~*
+Projects
+code_templates
+*.dcu
+*.~*~
+*.local
+*.identcache
+__history
+*.drc
+*.map
+*.exe
+bin/*

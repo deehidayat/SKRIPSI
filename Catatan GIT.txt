@@ -1,0 +1,42 @@
+mkdir ~/Hello-World
+# Creates a directory for your project called "Hello-World" in your user directory
+
+cd ~/Hello-World
+# Changes the current working directory to your newly created directory
+
+git init
+# Sets up the necessary Git files
+# Initialized empty Git repository in /Users/you/Hello-World/.git/
+
+touch README
+# Creates a file called "README" in your Hello-World directory
+
+git add README | git add .
+# Stages your README file, adding it to the list of files to be committed
+
+git commit -m 'first commit'
+# Commits your files, adding the message "first commit"
+
+git clone https://github.com/username/Spoon-Knife.git
+# Clones your fork of the repository into the current directory in terminal
+
+cd Spoon-Knife
+# Changes the active directory in the prompt to the newly cloned "Spoon-Knife" directory
+
+git remote add upstream https://github.com/octocat/Spoon-Knife.git
+# Assigns the original repository to a remote called "upstream"
+
+git remote remove upstream
+# Menghapus variabel upstream
+
+git fetch upstream
+# Pulls in changes not present in your local repository, without modifying your files
+
+git fetch upstream
+# Fetches any new changes from the original repository
+
+git merge upstream/master
+# Merges any changes fetched into your working files
+
+git push upstream master
+# Pushes commits to your remote repository stored on GitHub

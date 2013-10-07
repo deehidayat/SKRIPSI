@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<TgConfig Version="3" SubLevelDisabled="False">
+  <Option Name="namespaceFolder.MODULE" Type="System.String" Value="MODULE" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.DML" Type="System.String" Value="DML" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.matakuliah" Type="System.String" Value="matakuliah" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.jurusan" Type="System.String" Value="jurusan" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.penjadwalan" Type="System.String" Value="penjadwalan" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.index" Type="System.String" Value="index" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.kegiatan" Type="System.String" Value="kegiatan" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.XMLLog" Type="System.String" Value="XMLLog" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.splashscreen" Type="System.String" Value="splashscreen" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.TA17090069" Type="System.String" Value="TA17090069" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.dosenjurusan" Type="System.String" Value="dosenjurusan" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.SESSION" Type="System.String" Value="SESSION" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.XMLSetting" Type="System.String" Value="XMLSetting" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.dosen" Type="System.String" Value="dosen" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.datamodul" Type="System.String" Value="datamodul" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.PARENT" Type="System.String" Value="PARENT" Category="General" IsBrowsable="False" />
+  <Option Name="Gendoc.Images" Type="System.Boolean" Value="True" Category="General" IsBrowsable="False" />
+  <Option Name="Gendoc.NavigationTree" Type="System.Boolean" Value="True" Category="General" IsBrowsable="False" />
+  <Option Name="Gendoc.LaunchBrowser" Type="System.Boolean" Value="True" Category="General" IsBrowsable="False" />
+  <Option Name="Gendoc.OutputFolder" Type="System.String" Value="D:\Programmer's\Dee\Kuliah\TA\Aplikasi\17090069\out\doc" Category="General" IsBrowsable="False" />
+  <Option Name="namespaceFolder.pengajar" Type="System.String" Value="pengajar" Category="General" IsBrowsable="False" />
+</TgConfig>
